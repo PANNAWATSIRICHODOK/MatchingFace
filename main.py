@@ -55,10 +55,9 @@ for filename in os.listdir(group_folder):
         # 🛑 ถ้าไม่เจอใบหน้าเลย
         if len(face_encodings) == 0:
             print(
-                f"\n📸 {filename}: ❌ ไม่พบใบหน้าในภาพ — (อาจเบลอ, หันหลัง, บังหน้า ฯลฯ)\n")
+                f"\n📸 {filename}: ❌ ไม่พบใบหน้าในภาพ — (อาจเบลอ, หันหลัง, บังหน้า ฯลฯ) 💾 บันทึกใน: output/no_faces/{filename}")
             save_path = os.path.join(folder_no_faces, filename)
             cv2.imwrite(save_path, cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
-            print(f"💾 บันทึกใน: output/no_faces/{filename}")
             continue
 
         image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
@@ -89,7 +88,7 @@ for filename in os.listdir(group_folder):
         if people_found == {"unknown"}:
             save_path = os.path.join(base_output, "unknown", filename)
             cv2.imwrite(save_path, image_bgr)
-            print("❌ ไม่พบคนรู้จัก → บันทึกใน: unknown/")
+            print("❌ ไม่พบคนรู้จัก → 💾 บันทึกใน: unknown/")
         else:
             for person in people_found:
                 if person != "unknown":
@@ -99,6 +98,6 @@ for filename in os.listdir(group_folder):
                 [p for p in people_found if p != "unknown"])
             folders_logged = ', '.join(
                 [f"{p}/" for p in people_found if p != "unknown"])
-            print(f"✅ พบ: {names_to_log} → บันทึกใน: {folders_logged}")
+            print(f"✅ พบ: {names_to_log} → 💾 บันทึกใน: {folders_logged}")
 
 print("\n✅ เสร็จสิ้น")
